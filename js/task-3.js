@@ -1,30 +1,43 @@
-// Задача 3. Перевірка спаму
-// ВИКОНУЙ ЦЕ ЗАВДАННЯ У ФАЙЛІ task-3.js
-// Функція checkForSpam(message) приймає рядок(параметр message), перевіряє його на вміст заборонених слів spam і sale,
-//     і повертає результат перевірки.Слова в рядку параметра message можуть бути в довільному регістрі, наприклад SPAM або
-// sAlE.
+// Напиши клас StringBuilder, який приймає один параметр initialValue — довільний рядок,
+//     який записується у приватну властивість value об'єкта, що створюється.
 
-// Доповни код функції таким чином, що:
 
-// Якщо знайдено заборонене слово (spam або sale), то функція повертає буль true
-// Якщо в рядку відсутні заборонені слова, функція повертає буль false
-// Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи.У консоль будуть виведені
-//  результати її роботи.
 
-function checkForSpam(message) {
-    const text=  message.toLowerCase();
-    if (text.includes("spam") || text.includes("sale")) return true;
-    else return false;
+// Оголоси наступні методи класу:
+
+// getValue() — повертає поточне значення приватної властивості value.
+//     padEnd(str) — отримує параметр str(рядок) і додає його в кінець значення приватної властивості value
+//  об'єкта, який викликає цей метод.
+// padStart(str) — отримує параметр str(рядок) і додає його на початок значення приватної властивості value
+// об'єкта, який викликає цей метод.
+// padBoth(str) — отримує параметр str(рядок) і додає його на початок і в кінець значення приватної властивості
+//  value об'єкта, який викликає цей метод.
+// Візьми код нижче з ініціалізацією екземпляра й викликами методів і встав його після оголошення класу для
+//  перевірки коректності роботи.У консоль будуть виведені результати їх роботи.Будь ласка, нічого там не змінюй.
+
+class StringBuilder {
+  #value;
+  constructor(initialValue) {
+    this.#value = initialValue;
+  }
+  getValue() {
+    return this.#value;
+  }
+  padEnd(str) {
+    this.#value += str;
+  }
+  padStart(str) {
+    this.#value = str + this.#value;
+  }
+  padBoth(str) {
+    this.#value = str + this.#value + str;
+  }
 }
-
-
-
-
-console.log(checkForSpam("Latest technology news")); // false
-console.log(checkForSpam("JavaScript weekly newsletter")); // false
-console.log(checkForSpam("Get best sale offers now!")); // true
-console.log(checkForSpam("Amazing SalE, only tonight!")); // true
-console.log(checkForSpam("Trust me, this is not a spam message")); // true
-console.log(checkForSpam("Get rid of sPaM emails. Our book in on sale!")); // true
-console.log(checkForSpam("[SPAM] How to earn fast money?")); // true
-
+const builder = new StringBuilder(".");
+console.log(builder.getValue()); // "."
+builder.padStart("^");
+console.log(builder.getValue()); // "^."
+builder.padEnd("^");
+console.log(builder.getValue()); // "^.^"
+builder.padBoth("=");
+console.log(builder.getValue()); // "=^.^="
